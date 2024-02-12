@@ -11,4 +11,12 @@ class PhotosController < ApplicationController
     @photo = matching_relation.first
     render({ :template => "photo_templates/show" })
   end
+
+  def destroy
+    id = params["path_id"]
+    matching_relation = Photo.where({ :id => id })
+    matching_photo_instance = matching_relation.first
+    matching_photo_instance.destroy
+    redirect_to("/photos")
+  end
 end
