@@ -23,4 +23,13 @@ class UsersController < ApplicationController
     new_user.save
     redirect_to("/users/#{new_user.username}")
   end
+
+  def update
+    id = params["path_id"]
+    matching_relation = User.where({ :id => id })
+    user = matching_relation.first
+    user.username = params["input_username"]
+    user.save
+    redirect_to("/users/#{user.username}")
+  end
 end
