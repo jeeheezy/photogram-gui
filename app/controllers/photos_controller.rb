@@ -19,4 +19,13 @@ class PhotosController < ApplicationController
     matching_photo_instance.destroy
     redirect_to("/photos")
   end
+
+  def create
+    new_photo = Photo.new
+    new_photo.image = params["input_image_url"]
+    new_photo.caption = params["input_caption"]
+    new_photo.owner_id = params["input_owner_id"]
+    new_photo.save
+    redirect_to("/photos/#{new_photo.id}")
+  end
 end
