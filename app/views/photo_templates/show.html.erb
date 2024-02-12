@@ -5,13 +5,24 @@
   <dd><img src="<%= @photo.image %>"></dd>
 
   <dt>Caption</dt>
-  <dd><%= @photo.caption %></dd>
+  <dd><p><%= @photo.caption %><p></dd>
 
   <dt>Owner</dt>
   <dd><%= @photo.poster.username %></dd>
 
+  <dt>Posted</dt>
+  <dd><%= @photo.created_at %></dd>
+
   <dt>Edit photo</dt>
-  <dd></dd>
+  <dd>
+    <form action="/update_photo/<%= @photo.id %>" method="post">
+      <label for="image_field">Image</label>
+      <input type="text" id="image_field" name="input_image_url" value="<%= @photo.image %>">
+      <label for="caption_field">Caption</label>
+      <textarea name="input_caption" id="caption_field" rows="2"><%= @photo.caption %></textarea>
+      <button>Update photo</button>
+    </form>
+  </dd>
 
   <dt>Delete photo</dt>
   <dd><a href="/delete_photo/<%= @photo.id %>">Delete this photo</a></dd>
@@ -35,3 +46,13 @@
 </table>
 
 <h3>Add a new comment</h3>
+
+<form action="/add_comment" method="post">
+  <label for="photo_id_field">Photo ID</label>
+  <input type="text" id="photo_id_field" name="input_photo_id" placeholder="Enter the photo ID" value="<%= @photo.id %>">
+  <label for="author_id_field">Author ID</label>
+  <input type="text" id="author_id_field" name="input_author_id" placeholder="Enter your author ID">
+  <label for="comment_field">Comment</label>
+  <textarea name="input_comment" id="comment_field" rows="2" placeholder="Enter a comment..."></textarea>
+  <button>Add comment</button>
+</form>
